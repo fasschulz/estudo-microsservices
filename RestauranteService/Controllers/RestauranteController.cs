@@ -54,7 +54,7 @@ public class RestauranteController : ControllerBase
 
         var restauranteReadDto = _mapper.Map<RestauranteReadDto>(restaurante);
 
-        _itemServiceHttpClient.EnviaRestauranteParaItemService(restauranteReadDto);
+        await _itemServiceHttpClient.EnviaRestauranteParaItemServiceAsync(restauranteReadDto);
 
 
         return CreatedAtRoute(nameof(GetRestauranteById), new { restauranteReadDto.Id }, restauranteReadDto);
