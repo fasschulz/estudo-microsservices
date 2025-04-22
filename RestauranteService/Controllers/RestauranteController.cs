@@ -59,7 +59,14 @@ public class RestauranteController : ControllerBase
 
         //await _itemServiceHttpClient.EnviaRestauranteParaItemServiceAsync(restauranteReadDto);
 
-        _rabbitMqClient.PublicaRestaurante(restauranteReadDto);
+        try
+        {
+            _rabbitMqClient.PublicaRestaurante(restauranteReadDto);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
 
         return CreatedAtRoute(nameof(GetRestauranteById), new { restauranteReadDto.Id }, restauranteReadDto);
     }
